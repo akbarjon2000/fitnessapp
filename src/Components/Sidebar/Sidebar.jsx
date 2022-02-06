@@ -1,51 +1,23 @@
 import { React } from "react"
-import { SidebarStyle } from "./Style";
-import "./sidebar.css"
-import { Layout, Menu } from "antd";
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
-const { Header, Content, Footer, Sider } = Layout;
+import { NavLink } from "react-router-dom"
+import { Container } from "./Style";
+import { ReactComponent as Logo } from "../../Assets/icons/fitness-logo.svg";
+import { sidebar } from "../../Utils/sidebar";
 const Sidebar = () => {
     return (
-        <SidebarStyle>
-            <Layout>
-                <Sider
-                    breakpoint="lg"
-                    collapsedWidth="0"
-                    onBreakpoint={broken => {
-                        console.log(broken);
-                    }}
-                    onCollapse={(collapsed, type) => {
-                        console.log(collapsed, type);
-                    }}
-                    className="custom-sidebar"
-                >
-                    <div className="logo" />
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-                        <Menu.Item key="1" icon={<UserOutlined />}>
-                            nav 1
-                        </Menu.Item>
-                        <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                            nav 2
-                        </Menu.Item>
-                        <Menu.Item key="3" icon={<UploadOutlined />}>
-                            nav 3
-                        </Menu.Item>
-                        <Menu.Item key="4" icon={<UserOutlined />}>
-                            nav 4
-                        </Menu.Item>
-                    </Menu>
-                </Sider>
-                <Layout>
-                    <Header className="site-layout-sub-header-background" style={{ padding: 0 }} />
-                    <Content style={{ margin: '24px 16px 0' }}>
-                        <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                            content
-                        </div>
-                    </Content>
-                    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
-                </Layout>
-            </Layout>
-        </SidebarStyle>
+        <Container>
+            <div className="logo">
+                <Logo />
+                <p style={{ margin: "0" }}>My Fitness</p>
+
+            </div>
+            {sidebar.map(({ id, title, pathname, Icon, size }) => (
+                <NavLink to={pathname} className="align__center menu__item" key={id}>
+                    <Icon color="#84818A" className="icon" />
+                    <p className="text">{title}</p>
+                </NavLink>
+            ))}
+        </Container>
     )
 }
 
